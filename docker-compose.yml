@@ -1,0 +1,70 @@
+version: "3.3"
+networks:
+   glpiNet:
+     ipam:
+       driver: default
+       config:
+         - subnet: ${SUBNET}.0/24
+
+services:
+  glpi:
+    image: johann8/alpine-glpi:${VERSION}
+    container_name: glpi
+    hostname: glpi
+    restart: unless-stopped
+    depends_on:
+      - mariadb-glpi
+    volumes:
+      - ${DOCKERDIR}/data/glpi/files:/var/www/html/files/:rw
+      - ${DOCKERDIR}/data/glpi/plugins:/var/www/html/plugins/:rw
+      - ${DOCKERDIR}/data/glpi/config:/var/www/html/config/:rw
+      # For crond
+      - ${DOCKERDIR}/data/crond/2min:/etc/periodic/2min/
+      - ${DOCKERDIR}/data/crond/5min:/etc/periodic/5min/
+      - ${DOCKERDIR}/data/crond/hourly:/etc/periodic/hourly/
+      - ${DOCKERDIR}/data/crond/daily:/etc/periodic/daily/
+    env_file:
+      - ${DOCKERDIR}/.env
+    environment:
+      GLPI_LANG: ${GLPI_LANG}
+      TZ: ${TZ}
+      MARIADB_HOST: ${MARIADB_HOST}
+      MARIADB_PORT: ${MARIADB_PORT}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      VERSION: ${VERSION}
+      #PLUGINS: ${PLUGINS}
+    ports:
+      - ${PORT1}:8080
+    networks:
+      glpiNet:
+        #ipv4_address: 172.26.2.2
+        aliases:
+          - glpi
+
+  mariadb-glpi:
+    image: mariadb:${VERSION_DB}
+    container_name: mariadbGLPI
+    stop_grace_period: 45s
+    restart: unless-stopped
+    healthcheck:
+      test: "mysqladmin ping -h localhost -u$${MARIADB_USER} --password=$${MARIADB_PASSWORD}"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: always
+    volumes:
+      - "${DOCKERDIR}/data/mariadb/data:/var/lib/mysql:rw"
+      #- "${DOCKERDIR}/data/mariadb/socket:/var/run/mysqld"
+      - "${DOCKERDIR}/data/mariadb/config:/etc/mysql/conf.d:ro"
+    environment:
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    ports:
+      - "127.0.0.1:43306:3306"
+    networks:
+      glpiNet:
+

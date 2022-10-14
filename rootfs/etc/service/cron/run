@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+# pipe stderr to stdout and run crond
+# -p Allows Cron to accept any user set crontables.
+exec 2>&1
+exec crond -f -l 8

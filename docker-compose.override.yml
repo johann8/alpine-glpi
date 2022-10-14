@@ -1,0 +1,24 @@
+version: "3.3"
+services:
+
+  glpi:
+    labels:
+      - "traefik.enable=true"
+      ### ==== to https ====
+      - "traefik.http.routers.glpi-secure.entrypoints=websecure"
+      - "traefik.http.routers.glpi-secure.rule=Host(`$HOSTNAME0.$DOMAINNAME`)"
+      - "traefik.http.routers.glpi-secure.tls=true"
+      - "traefik.http.routers.glpi-secure.tls.certresolver=production"  # für eigene Zertifikate
+      ### ==== to service ====
+      - "traefik.http.routers.glpi-secure.service=glpi"
+      - "traefik.http.services.glpi.loadbalancer.server.port=$PORT"
+      - "traefik.docker.network=proxy"
+      ### ==== redirect to authelia for secure login ====
+      - "traefik.http.routers.glpi-secure.middlewares=rate-limit@file,secHeaders@file"
+      #- "traefik.http.routers.glpi-secure.middlewares=authelia@docker,rate-limit@file,secHeaders@file"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
