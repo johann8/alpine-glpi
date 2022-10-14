@@ -64,6 +64,7 @@ RUN apk --no-cache add \
         nginx \
         runit \
         curl \
+        tzdata \
         # php8-pdo \
         # php8-pdo_pgsql \
         # php8-pdo_mysql \
@@ -107,6 +108,9 @@ RUN echo "session.cookie_httponly = On" >> /etc/php81/conf.d/custom.ini
 RUN mkdir -p /etc/periodic/2min \
     && mkdir -p /etc/periodic/5min \
     && mkdir -p /etc/periodic/30min
+
+# Set timezone
+RUN cp /usr/share/zoneinfo/${TZ} /etc/localtime
 
 # Install GLPI
 ADD https://github.com/glpi-project/glpi/releases/download/${GLPI_VERSION}/glpi-${GLPI_VERSION}.tgz /tmp/
