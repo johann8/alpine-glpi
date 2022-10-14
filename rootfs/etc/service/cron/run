@@ -3,4 +3,5 @@
 # pipe stderr to stdout and run crond
 # -p Allows Cron to accept any user set crontables.
 exec 2>&1
-exec crond -f -l 8
+exec crond -f -l 6 -d 6 -L /dev/stdout
+#exec crond -f -l 8
