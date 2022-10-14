@@ -114,6 +114,10 @@ echo -n "Setting \"date.timezone\" into custom.ini..."
 sed -i -e '/date.timezone=/c\date.timezone="'${TZ}'"' /etc/php81/conf.d/custom.ini
 echo "[done]"
 
+echo -n "Setting \"date.timezone\" into php.ini..."
+sed -i -e '/;date.timezone =/c\date.timezone = '${TZ}'' /etc/php81/php.ini
+echo "[done]"
+
 echo -n "Setting \"upload_max_filesize\" into custom.ini..."
 sed -i -e '/upload_max_filesize= /c\upload_max_filesize= '${UPLOAD_MAX_FILESIZE}'' /etc/php81/conf.d/custom.ini
 echo "[done]"
