@@ -1,8 +1,11 @@
 ARG ARCH=
-FROM ${ARCH}alpine:3.16
 
-LABEL Maintainer="Johann H. <info@itconsulting-hahn.de>" \
-      Description="Docker container with Nginx & PHP-FPM based on Alpine Linux. Fork: https://github.com/erseco/alpine-php-webserver"
+ARG BASE_IMAGE=alpine:3.16
+
+FROM ${ARCH}${BASE_IMAGE}
+
+LABEL Maintainer="Johann H. <email>" \
+      Description="Docker container with GLPI based on Alpine Linux."
 
 # set variables
 ENV container docker
