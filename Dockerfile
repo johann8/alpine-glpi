@@ -33,6 +33,7 @@ RUN apk --no-cache add \
         php81-fpm \
         php81-opcache \
         php81-pecl-apcu \
+        php81-pecl-memcached \
         php81-mysqli \
         php81-cli \
         php81-ldap \
