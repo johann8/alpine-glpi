@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set variables
-_VERSION=0.2
+_VERSION=0.6
 _TAG=alpine-glpi
 
 # build image glpi
