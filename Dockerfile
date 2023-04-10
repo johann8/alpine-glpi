@@ -10,7 +10,7 @@ LABEL Maintainer="Johann H. <email>" \
 # set variables
 ENV container docker
 
-ENV GLPI_VERSION 10.0.5
+ENV GLPI_VERSION 10.0.7
 
 ENV GLPI_LANG en_US
 
