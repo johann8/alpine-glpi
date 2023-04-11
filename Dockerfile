@@ -1,6 +1,6 @@
 ARG ARCH=
 
-ARG BASE_IMAGE=alpine:3.16
+ARG BASE_IMAGE=alpine:3.17
 
 FROM ${ARCH}${BASE_IMAGE}
 
@@ -69,7 +69,7 @@ RUN apk --no-cache add \
         runit \
         curl \
         tzdata \
-        mariadb‑client \
+        #mariadb‑client \
         # php8-pdo \
         # php8-pdo_pgsql \
         # php8-pdo_mysql \
