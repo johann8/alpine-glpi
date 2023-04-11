@@ -114,7 +114,7 @@ then
    # set www root directory
    echo -n "Setting www root directory...    "
    sed -i -e "s+###WWW_ROOT_DIRECTORY###+${WEB_ROOT_PATH}+" /etc/nginx/nginx.conf
-   echo "[done]
+   echo "[done]"
 else
    echo "GLPI is not installed yet."
 
