@@ -104,6 +104,7 @@ RUN apk --no-cache add \
 # Add configuration files
 #COPY --chown=nobody rootfs/ /
 COPY rootfs/ /
+COPY scripts/backup.sh /etc/periodic/daily/backup.sh
 
 # Set php option
 RUN echo "session.cookie_httponly = On" >> /etc/php81/conf.d/custom.ini
@@ -125,7 +126,7 @@ RUN tar -zxf /tmp/glpi-${GLPI_VERSION}.tgz -C /tmp/ \
  && rm -rf /tmp/glpi-${GLPI_VERSION}.tgz
 
 
-VOLUME [ "/var/www/glpi/files", "/var/www/glpi/plugins" ]
+VOLUME [ "/var/www/glpi/files", "/var/www/glpi/plugins", "/var/www/glpi/config" ]
 
 
 ## Switch to use a non-root user from here on
