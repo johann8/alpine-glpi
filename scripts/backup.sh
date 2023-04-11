@@ -36,7 +36,7 @@ if [ -z $MARIADB_USER ]; then
   MARIADB_USER="glpi"
 fi
 
-/bin/mysqldump -h $MARIADB_HOST -P $MARIADB_PORT -u $MARIADB_USER -p$MARIADB_PASSWORD --single-transaction --databases $MARIADB_DATABASE | /usr/bin/gzip > /var/www/glpi/files/_dumps/glpi-backup-${NOW}.sql.gz
+/usr/bin/mysqldump -h $MARIADB_HOST -P $MARIADB_PORT -u $MARIADB_USER -p$MARIADB_PASSWORD --single-transaction --databases $MARIADB_DATABASE | /bin/gzip > /var/www/glpi/files/_dumps/glpi-backup-${NOW}.sql.gz
 
 if [ $? -eq 0 ]; then
 
@@ -46,5 +46,5 @@ if [ $? -eq 0 ]; then
 
 fi
 
-/bin/find /var/www/glpi/files/_dumps/ -mtime +30 -delete
+/usr/bin/find /var/www/glpi/files/_dumps/ -mtime +30 -delete
 
