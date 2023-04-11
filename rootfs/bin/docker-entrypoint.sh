@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# set variables
+INSTALL_WEB_ROOT_PATH="/var/www/glpi"
+WEB_ROOT_PATH="/var/www/glpi/public"
+
+# add functions
 shutdown() {
   echo "shutting down container"
 
@@ -105,8 +110,18 @@ then
    echo -n "Deleting \"install.php\" file... "
    rm -rf /var/www/glpi/install/install.php
    echo "[done]"
+
+   # set www root directory
+   echo -n "Setting www root directory...    "
+   sed -i -e "s+###WWW_ROOT_DIRECTORY###+${WEB_ROOT_PATH}+" /etc/nginx/nginx.conf
+   echo "[done]
 else
    echo "GLPI is not installed yet."
+
+   # set www install root directory
+   echo -n "Setting www install root directory... "
+   sed -i -e "s+###WWW_ROOT_DIRECTORY###+${INSTALL_WEB_ROOT_PATH}+" /etc/nginx/nginx.conf
+   echo "[done]"
 fi
 
 # Set options into custom.ini
