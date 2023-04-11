@@ -17,7 +17,7 @@ echo "0       5       1       *       *       run-parts /etc/periodic/monthly" >
 echo " " /etc/crontabs/root
 echo "# GLPI - Run autojobs" >> /etc/crontabs/root
 echo "*/2     *       *       *       *       /usr/bin/php${PHP_VERSION} -c /etc/php${PHP_VERSION}/php.ini /var/www/glpi/front/cron.php" >> /etc/crontabs/root
-echo " " >> /etc/crontabs/root
-echo "# Run GLPI Database backup" >> /etc/crontabs/root
-echo "0       1       *       *       *       /bin/backup.sh" >> /etc/crontabs/root
+#echo " " >> /etc/crontabs/root
+#echo "# Run GLPI Database backup" >> /etc/crontabs/root
+#echo "0       1       *       *       *       /bin/backup.sh" >> /etc/crontabs/root
 crontab -l
