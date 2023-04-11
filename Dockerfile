@@ -69,6 +69,7 @@ RUN apk --no-cache add \
         runit \
         curl \
         tzdata \
+        mariadb‑client \
         # php8-pdo \
         # php8-pdo_pgsql \
         # php8-pdo_mysql \
@@ -104,7 +105,7 @@ RUN apk --no-cache add \
 # Add configuration files
 #COPY --chown=nobody rootfs/ /
 COPY rootfs/ /
-COPY scripts/backup.sh /etc/periodic/daily/backup.sh
+COPY scripts/backup.sh /bin/backup.sh
 
 # Set php option
 RUN echo "session.cookie_httponly = On" >> /etc/php81/conf.d/custom.ini
