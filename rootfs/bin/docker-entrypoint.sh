@@ -84,18 +84,6 @@ for script in $(find /docker-entrypoint-init.d/ -executable -type f); do
 done
 echo "Finished startup scripts in /docker-entrypoint-init.d"
 
-echo "Starting runit..."
-exec runsvdir -P /etc/service &
-
-RUNSVDIR=$!
-echo "Started runsvdir, PID is $RUNSVDIR"
-echo "wait for processes to start...."
-
-sleep 5
-for _srv in $(ls -1 /etc/service); do
-    sv status $_srv
-done
-
 # JH addded on 12.10.2022
 # Run function only for GLPI
 # ========= Start ==========
@@ -141,6 +129,18 @@ echo -n "Setting \"post_max_size\" into custom.ini..."
 sed -i -e '/post_max_size= /c\post_max_size= '${POST_MAX_SIZE}'' /etc/php81/conf.d/custom.ini
 echo "[done]"
 # ========== END ==========
+
+echo "Starting runit..."
+exec runsvdir -P /etc/service &
+
+RUNSVDIR=$!
+echo "Started runsvdir, PID is $RUNSVDIR"
+echo "wait for processes to start...."
+
+sleep 5
+for _srv in $(ls -1 /etc/service); do
+    sv status $_srv
+done
 
 # catch shutdown signals
 trap shutdown SIGTERM SIGHUP SIGQUIT SIGINT
