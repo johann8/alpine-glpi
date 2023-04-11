@@ -110,8 +110,8 @@ RUN echo "session.cookie_httponly = On" >> /etc/php81/conf.d/custom.ini
 
 # create crond folder
 RUN mkdir -p /etc/periodic/2min \
-    && mkdir -p /etc/periodic/5min \
-    && mkdir -p /etc/periodic/30min
+ && mkdir -p /etc/periodic/5min \
+ && mkdir -p /etc/periodic/30min
 
 # Set timezone
 RUN cp /usr/share/zoneinfo/${TZ} /etc/localtime
@@ -120,18 +120,19 @@ RUN cp /usr/share/zoneinfo/${TZ} /etc/localtime
 ADD https://github.com/glpi-project/glpi/releases/download/${GLPI_VERSION}/glpi-${GLPI_VERSION}.tgz /tmp/
 
 RUN tar -zxf /tmp/glpi-${GLPI_VERSION}.tgz -C /tmp/ \
- && mv /tmp/glpi/* /var/www/html/ \
- && chown -R nginx:nginx /var/www/html \
+ && mv /tmp/glpi /var/www/glpi \
+ && chown -R nginx:nginx /var/www/glpi/ \
  && rm -rf /tmp/glpi-${GLPI_VERSION}.tgz
 
-VOLUME [ "/var/www/html/files", "/var/www/html/plugins" ]
+
+VOLUME [ "/var/www/glpi/files", "/var/www/glpi/plugins" ]
 
 
 ## Switch to use a non-root user from here on
 #USER nobody
 
 # Add application
-WORKDIR /var/www/html
+WORKDIR /var/www/glpi
 
 # Expose the port nginx is reachable on
 EXPOSE 8080
