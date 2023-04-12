@@ -61,7 +61,7 @@ VerifyDir () {
 # Function only for GLPI
 # Set permissions
 SetPermissions () {
-  echo -n "Setting chown in files and plugins...        "
+  echo -n "Setting chown in files and plugins...            "
   chown -R nginx:nginx /var/www/glpi/files
   chown -R nginx:nginx /var/www/glpi/plugins
   echo "[done]"
@@ -106,12 +106,12 @@ then
    echo
    #echo "GLPI has already been installed."
    echo "GLPI installation \"install.php\" file will be deleted."
-   echo -n "Deleting \"install.php\" file...                 "
+   echo -n "Deleting \"install.php\" file...                   "
    rm -rf /var/www/glpi/install/install.php
    echo "[done]"
 
    # set www root directory
-   echo -n "Setting www root directory...                  "
+   echo -n "Setting www root directory...                    "
    sed -i -e "s+###WWW_ROOT_DIRECTORY###+${WEB_ROOT_PATH}+" /etc/nginx/nginx.conf
    echo "[done]"
 else
@@ -150,6 +150,11 @@ echo -n "Setting \"post_max_size\" into custom.ini...       "
 sed -i -e '/post_max_size= /c\post_max_size= '${POST_MAX_SIZE}'' /etc/php81/conf.d/custom.ini
 echo "[done]"
 # ========== END ==========
+echo
+echo "+-----------------------------------------------+"
+echo "|            Starting all services...           |"
+echo "+-----------------------------------------------+"
+echo
 
 echo "Starting runit..."
 exec runsvdir -P /etc/service &
