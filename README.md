@@ -9,7 +9,7 @@ GLPI is a web-based application helping companies to manage their information sy
 
 - [GLPI Docker Image](#glpi-docker-image)
 - [Install GLPI docker container](#install-glpi-docker-container)
- - [Setup timezone](#setup-timezone)
+  - [Setup timezone](#setup-timezone)
 
 ## GLPI Docker Image
 Image is based on [Alpine 3.17](https://hub.docker.com/repository/docker/johann8/bacularis/general)
