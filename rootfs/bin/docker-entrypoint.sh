@@ -61,7 +61,7 @@ VerifyDir () {
 # Function only for GLPI
 # Set permissions
 SetPermissions () {
-  echo -n "Setting chown in files and plugins... "
+  echo -n "Setting chown in files and plugins...        "
   chown -R nginx:nginx /var/www/glpi/files
   chown -R nginx:nginx /var/www/glpi/plugins
   echo "[done]"
@@ -98,14 +98,15 @@ SetPermissions
 
 # Delete installation file "install.php" if glpi is already installed
 if [[ -e "/var/www/glpi/config/glpicrypt.key" ]]
-then
+then 
+   echo
    echo "+-----------------------------------------------+"
    echo "|       GLPI has already been installed!        |"
    echo "+-----------------------------------------------+"
    echo
    #echo "GLPI has already been installed."
    echo "GLPI installation \"install.php\" file will be deleted."
-   echo -n "Deleting \"install.php\" file...               "
+   echo -n "Deleting \"install.php\" file...                 "
    rm -rf /var/www/glpi/install/install.php
    echo "[done]"
 
@@ -114,6 +115,7 @@ then
    sed -i -e "s+###WWW_ROOT_DIRECTORY###+${WEB_ROOT_PATH}+" /etc/nginx/nginx.conf
    echo "[done]"
 else
+   echo
    echo "+-----------------------------------------------+"
    echo "|          GLPI is not installed yet!           |"
    echo "+-----------------------------------------------+"
@@ -127,6 +129,7 @@ else
 fi
 
 # Set options into custom.ini
+echo
 echo "+-----------------------------------------------+"
 echo "|   Customizing from environment variables...   |"
 echo "+-----------------------------------------------+"
