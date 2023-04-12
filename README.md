@@ -56,5 +56,27 @@ docker-compose ps
 - Go to http://glpi.mydomain.de
 - Enter the database connection details as shown in the picture
 ![Connect to Database](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Setup_01.PNG)
+- Choose the database glpi
+![Choose Database](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Setup_02.PNG)
+
+- Run through the installation wizard and log in with glpi / glpi
+- After logging in the message appears at the top
+![First Login](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Setup_03.PNG)
+
+- Log out and restart docker  container
+```bash
+DOCKERDIR=/opt/glpi
+cd ${DOCKERDIR}
+docker-compose down && docker-compose up -d
+
+# show logs
+docker-compose logs
+
+# show running containers
+docker-compose ps
+```
+- If you see the message like on the picture under Logs `docker-compose logs`, then the installation went through successfully
+![First container restart ](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Setup_04.PNG)
+
 
 ### Setup timezone
