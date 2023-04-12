@@ -78,5 +78,30 @@ docker-compose ps
 - If you see the message like on the picture under Logs `docker-compose logs`, then the installation went through successfully
 ![First container restart ](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Setup_04.PNG)
 
+- You can configure GLPI now
 
-### Setup timezone
+## Setup timezone
+- First you have to grant the database user `glpi` access to the table `time_zone_name`
+```bash
+DOCKERDIR=/opt/glpi
+cd ${DOCKERDIR}
+docker-compose exec mariadb-glpi bash
+
+mysql -uroot -p${MARIADB_ROOT_PASSWORD}
+
+MariaDB [mysql]> GRANT SELECT ON `mysql`.`time_zone_name` TO 'glpi'@'%';
+MariaDB [mysql]> FLUSH PRIVILEGES;
+\q
+exit
+```
+- Then activate timezone in `glpi`
+```bash
+DOCKERDIR=/opt/glpi
+cd ${DOCKERDIR}
+docker-compose exec glpi sh
+php bin/console database:enable_timezones
+exit
+```
+- Check if everything went well. Log in to the web interface
+- Go to: Setup =>General =>Server. You will see: `Timezones seems loaded in database`
+
