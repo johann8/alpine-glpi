@@ -3,7 +3,12 @@
 # set variables
 PHP_VERSION=81
 
+# run main
 echo "Starting 02-add-crontabs.sh..."
+echo "+-----------------------------------+"
+echo "|          Setting Crontab          |"
+echo "+-----------------------------------+"
+echo
 echo "# do daily/weekly/monthly maintenance" > /etc/crontabs/root
 echo "# min   hour    day     month   weekday command" >> /etc/crontabs/root
 echo "*/2     *       *       *       *       run-parts /etc/periodic/2min" >> /etc/crontabs/root
