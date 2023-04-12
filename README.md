@@ -112,3 +112,4 @@ exit
 - Fill in the form as shown in the picture
 ![Mailgate](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Mailgate_01.PNG)
 
+Enjoy !
