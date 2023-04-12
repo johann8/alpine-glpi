@@ -10,6 +10,7 @@ GLPI is a web-based application helping companies to manage their information sy
 - [GLPI Docker Image](#glpi-docker-image)
 - [Install GLPI docker container](#install-glpi-docker-container)
   - [Setup timezone](#setup-timezone)
+  - [Setup Mailgate](#setup-mailgate)
 
 ## GLPI Docker Image
 Image is based on [Alpine 3.17](https://hub.docker.com/repository/docker/johann8/bacularis/general)
@@ -104,4 +105,10 @@ exit
 ```
 - Check if everything went well. Log in to the web interface
 - Go to: Setup =>General =>Server. You will see: `Timezones seems loaded in database`
+
+## Setup Mailgate
+- Log in to the web interface
+- Go to: Setup =>Automatic actions =>mailgate
+- Fill in the form as shown in the picture
+![Mailgate](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Mailgate_01.PNG)
 
