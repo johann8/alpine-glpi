@@ -5,6 +5,7 @@ PHP_VERSION=81
 
 # run main
 echo "Starting 02-add-crontabs.sh..."
+echo
 echo "+-----------------------------------+"
 echo "|          Setting Crontab          |"
 echo "+-----------------------------------+"
