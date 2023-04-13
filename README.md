@@ -111,7 +111,20 @@ exit
 
 
 ## Setup General
+- Enable inventory: Go to -> Administration =>Inventory =>Configuration => Enable inventory
+- Disable user normal: Go to -> Administration =>Users =>normal =>Set "Active" to No =>Save
+- Disable user post-only: Go to -> Administration =>Users =>post-only =>Set "Active" to No =>Save
+- Disable user tech: Go to -> Administration =>Users =>tech =>Set "Active" to No =>Save
+- Setup Email reciver: Go to -> Setup =>Receivers =>+ ADD => Bild
 
+- Register Account GLPI Network: Go to -> Setup =>Plugins =>Marketplace => Register on GLPI Network and fill your registration key in setup
+- Install the following plugins: Go to -> Setup =>Plugins =>Marketplace => Buid
+
+- Store the following Tags: Go to -> Setup =>Dropdowns =>Tag Management => Tags => Bild
+
+- Store the following Statuses: Go to -> Setup =>Dropdowns =>Common =>Statuses of items => Bild
+
+- Enable NotifiSetup =>Notifications =>Bild
 
 ## Setup Plugins
 
@@ -125,4 +138,3 @@ exit
 - Fill in the form as shown in the picture
 ![Mailgate](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Mailgate_01.PNG)
 
-Enjoy !
