@@ -14,6 +14,7 @@ GLPI is a web-based application helping companies to manage their information sy
   - [Setup Plugins via CLI](#setup-plugins-via-cli)
   - [Setup OCS Inventory NG](#setup-ocs-inventory-ng)
   - [Setup Mailgate](#setup-mailgate)
+  - [Setup Memcached](#setup-memcached)
 
 ## GLPI Docker Image
 Image is based on [Alpine 3.17](https://hub.docker.com/repository/docker/johann8/bacularis/general)
@@ -128,7 +129,7 @@ exit
 - Store the following Statuses: Go to -> Setup =>Dropdowns =>Common =>Statuses of items
 ![Statuses](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Status_of_Items_01.PNG)
 
-- Enable NotifiSetup =>Notifications
+- Enable Notifications: Go to -> Setup =>Notifications
 ![Notifications](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Notifications_01.PNG)
 
 ## Setup Plugins via CLI
@@ -158,3 +159,12 @@ After installing of OCS Inventory NG plugin it must be configured.
 - Fill in the form as shown in the picture
 ![Mailgate](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Mailgate_01.PNG)
 
+## Setup Memcached
+If you have memcached docker container in the same stack, you can enable memcached under glpi as follows:
+```bash
+DOCKERDIR=/opt/glpi
+cd ${DOCKERDIR}
+docker-compose exec glpi sh
+php bin/console glpi:cache:configure --dsn memcached://memcached:11211
+exit
+```
