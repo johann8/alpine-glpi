@@ -9,7 +9,10 @@ GLPI is a web-based application helping companies to manage their information sy
 
 - [GLPI Docker Image](#glpi-docker-image)
 - [Install GLPI docker container](#install-glpi-docker-container)
-  - [Setup timezone](#setup-timezone)
+  - [Setup Timezone](#setup-timezone)
+  - [Setup General](#setup-general)
+  - [Setup Plugins](#setup-plugins)
+  - [Setup OCS Inventory NG](#setup-ocs-inventory-ng)
   - [Setup Mailgate](#setup-mailgate)
 
 ## GLPI Docker Image
@@ -81,7 +84,7 @@ docker-compose ps
 
 - You can configure GLPI now
 
-## Setup timezone
+## Setup Timezone
 - First you have to grant the database user `glpi` access to the table `time_zone_name`
 ```bash
 DOCKERDIR=/opt/glpi
@@ -105,6 +108,16 @@ exit
 ```
 - Check if everything went well. Log in to the web interface
 - Go to: Setup =>General =>Server. You will see: `Timezones seems loaded in database`
+
+
+## Setup General
+
+
+## Setup Plugins
+
+
+## Setup OCS Inventory NG
+
 
 ## Setup Mailgate
 - Log in to the web interface
