@@ -11,7 +11,7 @@ GLPI is a web-based application helping companies to manage their information sy
 - [Install GLPI docker container](#install-glpi-docker-container)
   - [Setup Timezone](#setup-timezone)
   - [Setup General](#setup-general)
-  - [Setup Plugins](#setup-plugins)
+  - [Setup Plugins via CLI](#setup-plugins-via-cli)
   - [Setup OCS Inventory NG](#setup-ocs-inventory-ng)
   - [Setup Mailgate](#setup-mailgate)
 
@@ -115,22 +115,42 @@ exit
 - Disable user normal: Go to -> Administration =>Users =>normal =>Set "Active" to No =>Save
 - Disable user post-only: Go to -> Administration =>Users =>post-only =>Set "Active" to No =>Save
 - Disable user tech: Go to -> Administration =>Users =>tech =>Set "Active" to No =>Save
-- Setup Email reciver: Go to -> Setup =>Receivers =>+ ADD => Bild
+- Setup Email reciver: Go to -> Setup =>Receivers =>+ ADD => Fill in the form as shown in the picture
+![Mail Reciver](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Recivers_Mail_01.PNG)
 
 - Register Account GLPI Network: Go to -> Setup =>Plugins =>Marketplace => Register on GLPI Network and fill your registration key in setup
-- Install the following plugins: Go to -> Setup =>Plugins =>Marketplace => Buid
+- Install the following plugins: Go to -> Setup =>Plugins =>Marketplace
+![Plugins](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Plugins_01.PNG)
 
-- Store the following Tags: Go to -> Setup =>Dropdowns =>Tag Management => Tags => Bild
+- Store the following Tags: Go to -> Setup =>Dropdowns =>Tag Management => Tags
+![Tags](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Tags_01.PNG)
 
-- Store the following Statuses: Go to -> Setup =>Dropdowns =>Common =>Statuses of items => Bild
+- Store the following Statuses: Go to -> Setup =>Dropdowns =>Common =>Statuses of items
+![Statuses](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Status_of_Items_01.PNG)
 
-- Enable NotifiSetup =>Notifications =>Bild
+- Enable NotifiSetup =>Notifications
+![Notifications](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Notifications_01.PNG)
 
-## Setup Plugins
-
-
+## Setup Plugins via CLI
+- You can install plugins via CLI
+```bash
+DOCKERDIR=/opt/glpi
+cd ${DOCKERDIR}
+docker-compose exec glpi sh
+ALL_PLUGINS="actualtime fields news reports formcreator addressing accounts mreporting moreticket genericobject ocsinventoryng pdf shellcommands tag timelineticket"
+for i in ${ALL_PLUGINS}; do
+   php bin/console glpi:marketplace:download $i
+   bin/console glpi:plugin:install $i -u glpi
+   bin/console glpi:plugin:activate $i
+   \cp -rf marketplace/$i plugins/
+   chown -R nginx:nginx plugins/$i
+done
+exit
+```
 ## Setup OCS Inventory NG
-
+-
+- Configure OCS Inventory NG plugin: Go to -> Tools => OCS Inventory NG =>Add a OCSNG server =>  Fill in the form as shown in the picture
+![OCS Inventory Server](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_OCS_Inventory_01.PNG)
 
 ## Setup Mailgate
 - Log in to the web interface
