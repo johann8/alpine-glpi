@@ -132,7 +132,7 @@ exit
 ![Notifications](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_Notifications_01.PNG)
 
 ## Setup Plugins via CLI
-- You can install plugins via CLI
+- You can install plugins via CLI (assuming you have registered marketplace)
 ```bash
 DOCKERDIR=/opt/glpi
 cd ${DOCKERDIR}
@@ -148,7 +148,7 @@ done
 exit
 ```
 ## Setup OCS Inventory NG
--
+After installing of OCS Inventory NG plugin it must be configured.
 - Configure OCS Inventory NG plugin: Go to -> Tools => OCS Inventory NG =>Add a OCSNG server =>  Fill in the form as shown in the picture
 ![OCS Inventory Server](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_OCS_Inventory_01.PNG)
 
