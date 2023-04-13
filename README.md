@@ -168,3 +168,4 @@ docker-compose exec glpi sh
 php bin/console glpi:cache:configure --dsn memcached://memcached:11211
 exit
 ```
+Enjoy!
