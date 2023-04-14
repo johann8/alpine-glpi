@@ -90,7 +90,7 @@ docker-compose ps
 ```bash
 DOCKERDIR=/opt/glpi
 cd ${DOCKERDIR}
-docker-compose exec mariadb-glpi bash
+docker-compose exec glpidb bash
 
 mysql -uroot -p${MARIADB_ROOT_PASSWORD}
 
