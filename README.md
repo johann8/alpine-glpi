@@ -149,9 +149,16 @@ done
 exit
 ```
 ## Setup OCS Inventory NG
-After installing of OCS Inventory NG plugin it must be configured.
+After installing of OCS Inventory NG plugin it must be configured. If database of `OCS Inventory` is running in the same `docker stack`, then you can use service name (e.g. ocsdb) as host. If `OCS Inventory` database is running in the other `docker stack`, then the database must listen on `port 3306` of host `IP address` and then you enter the `IP address` of docker host as the host.
 - Configure OCS Inventory NG plugin: Go to -> Tools => OCS Inventory NG =>Add a OCSNG server =>  Fill in the form as shown in the picture
 ![OCS Inventory Server](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_OCS_Inventory_01.PNG)
+
+If during the test you see the message like in the picture below, 
+![OCS Inventory Message](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_OCS_Inventory_02.PNG)
+then you have to change the following setting via the web interface of OCS Inventory:
+
+- Go to: Configuration > General Configuration > Server > TRACE_DELETE = ON
+![OCS Inventory Setting](https://raw.githubusercontent.com/johann8/alpine-glpi/master/docs/assets/screenshots/GLPI_OCS_Inventory_03.PNG)
 
 ## Setup Mailgate
 - Log in to the web interface
