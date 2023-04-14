@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # set variables
-INSTALL_WEB_ROOT_PATH="/var/www/glpi"
+#INSTALL_WEB_ROOT_PATH="/var/www/glpi"
+INSTALL_WEB_ROOT_PATH="/var/www/glpi/public"
 WEB_ROOT_PATH="/var/www/glpi/public"
 
 # add functions
