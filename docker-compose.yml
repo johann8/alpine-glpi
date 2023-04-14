@@ -7,13 +7,16 @@ networks:
          - subnet: ${SUBNET}.0/24
 
 services:
+#
+### === GLPI Web APP ===
+#
   glpi:
     image: johann8/alpine-glpi:${VERSION}
     container_name: glpi
     hostname: glpi
     restart: unless-stopped
     depends_on:
-      - mariadb-glpi
+      - glpidb
     volumes:
       - ${DOCKERDIR}/data/glpi/files:/var/www/html/files/:rw
       - ${DOCKERDIR}/data/glpi/plugins:/var/www/html/plugins/:rw
@@ -34,18 +37,17 @@ services:
       MARIADB_USER: ${MARIADB_USER}
       MARIADB_PASSWORD: ${MARIADB_PASSWORD}
       VERSION: ${VERSION}
-      #PLUGINS: ${PLUGINS}
-    ports:
-      - ${PORT1}:8080
+    #ports:
+    #  - ${PORT1}:8080
     networks:
       glpiNet:
-        #ipv4_address: 172.26.2.2
-        aliases:
-          - glpi
 
-  mariadb-glpi:
+#
+### === Database ===
+#
+  glpidb:
     image: mariadb:${VERSION_DB}
-    container_name: mariadbGLPI
+    container_name: glpidb
     stop_grace_period: 45s
     restart: unless-stopped
     healthcheck:
@@ -67,4 +69,21 @@ services:
       - "127.0.0.1:43306:3306"
     networks:
       glpiNet:
+        ipv4_address: ${SUBNET}.10
 
+#
+### === MEMCACHED ===
+#
+  memcached:
+    image: memcached:alpine3.17
+    container_name: memcached
+    restart: always
+    depends_on:
+      - glpi
+    environment:
+      - TZ=${TZ}
+    env_file:
+      - ${DOCKERDIR}/.env
+    command: ["-m", "128"]
+    networks:
+      glpiNet:
