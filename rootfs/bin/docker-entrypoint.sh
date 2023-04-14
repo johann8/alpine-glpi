@@ -123,7 +123,7 @@ else
    #echo "GLPI is not installed yet."
 
    # set www install root directory
-   echo -n "Setting www install root directory...          "
+   echo -n "Setting www install root directory...            "
    sed -i -e "s+###WWW_ROOT_DIRECTORY###+${INSTALL_WEB_ROOT_PATH}+" /etc/nginx/nginx.conf
    echo "[done]"
 fi
