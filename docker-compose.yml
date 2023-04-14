@@ -18,9 +18,9 @@ services:
     depends_on:
       - glpidb
     volumes:
-      - ${DOCKERDIR}/data/glpi/files:/var/www/html/files/:rw
-      - ${DOCKERDIR}/data/glpi/plugins:/var/www/html/plugins/:rw
-      - ${DOCKERDIR}/data/glpi/config:/var/www/html/config/:rw
+      - ${DOCKERDIR}/data/glpi/files:/var/www/glpi/files/:rw
+      - ${DOCKERDIR}/data/glpi/plugins:/var/www/glpi/plugins/:rw
+      - ${DOCKERDIR}/data/glpi/config:/var/www/glpi/config/:rw
       # For crond
       - ${DOCKERDIR}/data/crond/2min:/etc/periodic/2min/
       - ${DOCKERDIR}/data/crond/5min:/etc/periodic/5min/
