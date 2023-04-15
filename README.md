@@ -28,9 +28,9 @@ Image is based on [Alpine 3.17](https://hub.docker.com/repository/docker/johann8
 
 ```bash
 DOCKERDIR=/opt/glpi
-mkdir -p ${DOCKERDIR}/data/{glpi,crond,mariadb}
+mkdir -p ${DOCKERDIR}/data/{glpi,crond,crontabs,mariadb}
 mkdir -p ${DOCKERDIR}/data/glpi/{files,plugins,config}
-mkdir -p ${DOCKERDIR}/data/crond/{2min,5min,hourly,daily}
+mkdir -p ${DOCKERDIR}/data/crond/{5min,15min,30min,hourly,daily,weekly,monthly}
 mkdir -p ${DOCKERDIR}/data/mariadb/{dbdata,socket,config}
 chown -R 100:101 ${DOCKERDIR}/data/glpi/*
 cd ${DOCKERDIR}
