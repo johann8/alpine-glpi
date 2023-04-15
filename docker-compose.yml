@@ -21,11 +21,15 @@ services:
       - ${DOCKERDIR}/data/glpi/files:/var/www/glpi/files/:rw
       - ${DOCKERDIR}/data/glpi/plugins:/var/www/glpi/plugins/:rw
       - ${DOCKERDIR}/data/glpi/config:/var/www/glpi/config/:rw
-      # For crond
-      - ${DOCKERDIR}/data/crond/2min:/etc/periodic/2min/
-      - ${DOCKERDIR}/data/crond/5min:/etc/periodic/5min/
-      - ${DOCKERDIR}/data/crond/hourly:/etc/periodic/hourly/
+      # For crontab: comment out what you need
+      #- ${DOCKERDIR}/data/crond/5min:/etc/periodic/5min/
+      #- ${DOCKERDIR}/data/crond/15min:/etc/periodic/15min/
+      #- ${DOCKERDIR}/data/crond/30min:/etc/periodic/30min/
+      #- ${DOCKERDIR}/data/crond/hourly:/etc/periodic/hourly/
       - ${DOCKERDIR}/data/crond/daily:/etc/periodic/daily/
+      - ${DOCKERDIR}/data/crond/weekly:/etc/periodic/weekly/
+      - ${DOCKERDIR}/data/crond/monthly:/etc/periodic/monthly/
+      - ${DOCKERDIR}/data/crontabs:/etc/crontabs/
     env_file:
       - ${DOCKERDIR}/.env
     environment:
