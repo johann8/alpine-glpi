@@ -4,17 +4,28 @@ ARG BASE_IMAGE=alpine:3.18
 
 FROM ${ARCH}${BASE_IMAGE}
 
-LABEL Maintainer="Johann H. <email>" \
+LABEL Maintainer="JH <jh@localhost>" \
       Description="Docker container with GLPI based on Alpine Linux."
 
-ARG PHP_VERSION=81
+ARG BUILD_DATE
+ARG NAME
+ARG VCS_REF
+ARG VERSION
+
+LABEL org.label-schema.schema-version="1.0" \
+      org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.name=$NAME \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url="https://github.com/johann8/" \
+      org.label-schema.version=$VERSION
+
 
 # set variables
-ENV container docker
-
 ENV GLPI_VERSION 10.0.7
 
 ENV GLPI_LANG en_US
+
+ENV PHP_VERSION 81
 
 ENV MARIADB_HOST mariadb
 
