@@ -17,7 +17,7 @@ GLPI is a web-based application helping companies to manage their information sy
   - [Setup Memcached](#setup-memcached)
 
 ## GLPI Docker Image
-Image is based on [Alpine 3.17](https://hub.docker.com/repository/docker/johann8/bacularis/general)
+Image is based on [Alpine 3.18](https://hub.docker.com/repository/docker/johann8/alpine-glpi/general)
 
 | pull | size | version | platform |
 |:---------------------------------:|:----------------------------------:|:--------------------------------:|:--------------------------------:|
