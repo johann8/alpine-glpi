@@ -40,7 +40,7 @@ fi
 
 if [ $? -eq 0 ]; then
 
-  chown -R apache:apache /var/www/glpi/files/_dumps/glpi-backup-${NOW}.sql.gz
+  chown -R nginx:nginx /var/www/glpi/files/_dumps/glpi-backup-${NOW}.sql.gz
 
   ls -lh /var/www/glpi/files/_dumps/glpi-backup-${NOW}.sql.gz
 
