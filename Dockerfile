@@ -21,7 +21,7 @@ LABEL org.label-schema.schema-version="1.0" \
 
 
 # set variables
-ENV GLPI_VERSION 10.0.7
+ENV GLPI_VERSION 10.0.8
 
 ENV GLPI_LANG en_US
 
@@ -70,6 +70,7 @@ RUN apk --no-cache add \
         php${PHP_VERSION}-intl \
         php${PHP_VERSION}-dom \
         php${PHP_VERSION}-xmlreader \
+        php${PHP_VERSION}-xmlwriter \
         php${PHP_VERSION}-ctype \
         php${PHP_VERSION}-session \
         php${PHP_VERSION}-iconv \
