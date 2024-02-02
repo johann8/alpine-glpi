@@ -21,7 +21,7 @@ LABEL org.label-schema.schema-version="1.0" \
 
 
 # set variables
-ENV GLPI_VERSION 10.0.11
+ENV GLPI_VERSION 10.0.12
 
 ENV GLPI_LANG en_US
 
