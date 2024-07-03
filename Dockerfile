@@ -1,6 +1,6 @@
 ARG ARCH=
 
-ARG BASE_IMAGE=alpine:3.19
+ARG BASE_IMAGE=alpine:3.20
 
 FROM ${ARCH}${BASE_IMAGE}
 
@@ -21,11 +21,11 @@ LABEL org.label-schema.schema-version="1.0" \
 
 
 # set variables
-ENV GLPI_VERSION 10.0.15
+ENV GLPI_VERSION 10.0.16
 
 ENV GLPI_LANG en_US
 
-ENV PHP_VERSION 81
+ENV PHP_VERSION 82
 
 ENV MARIADB_HOST mariadb
 
@@ -112,9 +112,9 @@ RUN apk --no-cache add \
     && rm /etc/nginx/http.d/default.conf \
 ## Make sure files/folders needed by the processes are accessable when they run under the nobody user
 #    && chown -R nobody.nobody /run \
-     && chown -R nginx.nginx /var/log/php81 \
+     && chown -R nginx.nginx /var/log/php${PHP_VERSION} \
      && chown -R nginx.nginx /var/lib/nginx
-     #&& chown -R nginx.nginx /var/lib/php81     ### Since alpine 3.18 - Folder "/var/lib/php81" does not exist anymore
+     #&& chown -R nginx.nginx /var/lib/php${PHP_VERSION}     ### Since alpine 3.18 - Folder "/var/lib/php81" does not exist anymore
      #&& chown -R nobody.nobody /var/log/nginx
 
 # Add configuration files
@@ -122,8 +122,8 @@ RUN apk --no-cache add \
 COPY rootfs/ /
 COPY scripts/backup.sh /bin/backup.sh
 
-# Set php option
-RUN echo "session.cookie_httponly = On" >> /etc/php81/conf.d/custom.ini
+# Set php option and rights
+RUN echo "session.cookie_httponly = On" >> /etc/php${PHP_VERSION}/conf.d/custom.ini
 
 # create crond folder
 RUN mkdir -p /etc/periodic/2min \
@@ -133,8 +133,9 @@ RUN mkdir -p /etc/periodic/2min \
 # Set timezone
 RUN cp /usr/share/zoneinfo/${TZ} /etc/localtime
 
-# Edit php-fpm.conf
-RUN sed -i 's+;pid = run/php-fpm81.pid+pid = run/php-fpm81.pid+' /etc/php81/php-fpm.conf
+# Edit php-fpm config and rights
+RUN sed -i 's+;pid = run/php-fpm82.pid+pid = run/php-fpm82.pid+' /etc/php${PHP_VERSION}/php-fpm.conf \
+ && chmod 0644 /etc/php${PHP_VERSION}/php-fpm.d/www.conf
 
 # Install GLPI
 ADD https://github.com/glpi-project/glpi/releases/download/${GLPI_VERSION}/glpi-${GLPI_VERSION}.tgz /tmp/
