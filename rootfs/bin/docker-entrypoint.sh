@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # set variables
-#INSTALL_WEB_ROOT_PATH="/var/www/glpi"
 INSTALL_WEB_ROOT_PATH="/var/www/glpi/public"
 WEB_ROOT_PATH="/var/www/glpi/public"
+PHP_VERSION=82
 
 # add functions
 shutdown() {
@@ -136,19 +136,19 @@ echo "|   Customizing from environment variables...   |"
 echo "+-----------------------------------------------+"
 echo
 echo -n "Setting \"date.timezone\" into custom.ini...       "
-sed -i -e '/date.timezone=/c\date.timezone="'${TZ}'"' /etc/php81/conf.d/custom.ini
+sed -i -e '/date.timezone=/c\date.timezone="'${TZ}'"' /etc/php${PHP_VERSION}/conf.d/custom.ini
 echo "[done]"
 
 echo -n "Setting \"date.timezone\" into php.ini...          "
-sed -i -e '/;date.timezone =/c\date.timezone = '${TZ}'' /etc/php81/php.ini
+sed -i -e '/;date.timezone =/c\date.timezone = '${TZ}'' /etc/php${PHP_VERSION}/php.ini
 echo "[done]"
 
 echo -n "Setting \"upload_max_filesize\" into custom.ini... "
-sed -i -e '/upload_max_filesize= /c\upload_max_filesize= '${UPLOAD_MAX_FILESIZE}'' /etc/php81/conf.d/custom.ini
+sed -i -e '/upload_max_filesize= /c\upload_max_filesize= '${UPLOAD_MAX_FILESIZE}'' /etc/php${PHP_VERSION}/conf.d/custom.ini
 echo "[done]"
 
 echo -n "Setting \"post_max_size\" into custom.ini...       "
-sed -i -e '/post_max_size= /c\post_max_size= '${POST_MAX_SIZE}'' /etc/php81/conf.d/custom.ini
+sed -i -e '/post_max_size= /c\post_max_size= '${POST_MAX_SIZE}'' /etc/php${PHP_VERSION}/conf.d/custom.ini
 echo "[done]"
 # ========== END ==========
 echo
