@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 # set variables
-PHP_VERSION=81
+PHP_VERSION=82
 
 # run main
 echo "Starting 02-add-crontabs.sh..."
