@@ -1,6 +1,6 @@
 ARG ARCH=
 
-ARG BASE_IMAGE=alpine:3.20
+ARG BASE_IMAGE=alpine:3.22
 
 FROM ${ARCH}${BASE_IMAGE}
 
@@ -21,11 +21,11 @@ LABEL org.label-schema.schema-version="1.0" \
 
 
 # set variables
-ENV GLPI_VERSION 10.0.17
+ENV GLPI_VERSION 10.0.18
 
 ENV GLPI_LANG en_US
 
-ENV PHP_VERSION 82
+ENV PHP_VERSION 83
 
 ENV MARIADB_HOST mariadb
 
@@ -112,10 +112,10 @@ RUN apk --no-cache add \
     && rm /etc/nginx/http.d/default.conf \
 ## Make sure files/folders needed by the processes are accessable when they run under the nobody user
 #    && chown -R nobody.nobody /run \
-     && chown -R nginx.nginx /var/log/php${PHP_VERSION} \
-     && chown -R nginx.nginx /var/lib/nginx
-     #&& chown -R nginx.nginx /var/lib/php${PHP_VERSION}     ### Since alpine 3.18 - Folder "/var/lib/php81" does not exist anymore
-     #&& chown -R nobody.nobody /var/log/nginx
+     && chown -R nginx:nginx /var/log/php${PHP_VERSION} \
+     && chown -R nginx:nginx /var/lib/nginx
+     #&& chown -R nginx:nginx /var/lib/php${PHP_VERSION}     ### Since alpine 3.18 - Folder "/var/lib/php81" does not exist anymore
+     #&& chown -R nobody:nobody /var/log/nginx
 
 # Add configuration files
 #COPY --chown=nobody rootfs/ /
@@ -134,7 +134,7 @@ RUN mkdir -p /etc/periodic/2min \
 RUN cp /usr/share/zoneinfo/${TZ} /etc/localtime
 
 # Edit php-fpm config and rights
-RUN sed -i 's+;pid = run/php-fpm82.pid+pid = run/php-fpm82.pid+' /etc/php${PHP_VERSION}/php-fpm.conf \
+RUN sed -i 's+;pid = run/php-fpm83.pid+pid = run/php-fpm83.pid+' /etc/php${PHP_VERSION}/php-fpm.conf \
  && chmod 0644 /etc/php${PHP_VERSION}/php-fpm.d/www.conf
 
 # Install GLPI
