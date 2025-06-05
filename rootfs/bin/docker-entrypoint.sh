@@ -3,7 +3,9 @@
 # set variables
 INSTALL_WEB_ROOT_PATH="/var/www/glpi/public"
 WEB_ROOT_PATH="/var/www/glpi/public"
-PHP_VERSION=82
+#PHP_VERSION=82
+PHP_VERSION=83
+#PHP_VERSION=84
 
 # add functions
 shutdown() {
