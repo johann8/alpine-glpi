@@ -1,8 +1,7 @@
-ARG ARCH=
+ARG BASE_IMAGE=alpine:3.23
 
-ARG BASE_IMAGE=alpine:3.22
-
-FROM ${ARCH}${BASE_IMAGE}
+#FROM ${ARCH}${BASE_IMAGE}
+FROM ${BASE_IMAGE}
 
 LABEL Maintainer="JH <jh@localhost>" \
       Description="Docker container with GLPI based on Alpine Linux."
@@ -10,38 +9,29 @@ LABEL Maintainer="JH <jh@localhost>" \
 ARG BUILD_DATE
 ARG NAME
 ARG VCS_REF
-ARG VERSION
+ARG GLPI_VERSION=22.04
+ARG PHP_VERSION=8.3
 
 LABEL org.label-schema.schema-version="1.0" \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name=$NAME \
       org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/johann8/" \
-      org.label-schema.version=$VERSION
+      org.label-schema.vcs-url="https://github.com/johann8/" 
 
 
 # set variables
-ENV GLPI_VERSION 10.0.24
+ENV GLPI_VERSION=${GLPI_VERSION}
+ENV PHP_VERSION=${PHP_VERSION}
 
-ENV GLPI_LANG en_US
+ENV GLPI_LANG=en_US
+ENV MARIADB_HOST=mariadb
+ENV MARIADB_PORT=3306
+ENV MARIADB_DATABASE=glpidb
+ENV MARIADB_USER=glpiuser
 
-ENV PHP_VERSION 83
-
-ENV MARIADB_HOST mariadb
-
-ENV MARIADB_PORT 3306
-
-ENV MARIADB_DATABASE glpi
-
-ENV MARIADB_USER glpi
-
-ENV MARIADB_PASSWORD glpi
-
-ENV TZ Europe/Berlin
-
-ENV UPLOAD_MAX_FILESIZE 100M 
-
-ENV POST_MAX_SIZE 50M
+ENV TZ=Europe/Berlin
+ENV UPLOAD_MAX_FILESIZE=100M 
+ENV POST_MAX_SIZE=50M
 
 # Install packages
 RUN apk --no-cache add \
@@ -134,8 +124,15 @@ RUN mkdir -p /etc/periodic/2min \
 RUN cp /usr/share/zoneinfo/${TZ} /etc/localtime
 
 # Edit php-fpm config and rights
-RUN sed -i 's+;pid = run/php-fpm83.pid+pid = run/php-fpm83.pid+' /etc/php${PHP_VERSION}/php-fpm.conf \
+RUN if [[ ${PHP_VERSION} = 83 ]]; then \
+       sed -i 's+;pid = run/php-fpm83.pid+pid = run/php-fpm83.pid+' /etc/php${PHP_VERSION}/php-fpm.conf; \
+    elif [[ ${PHP_VERSION} = 84 ]]; then \
+       sed -i 's+;pid = run/php-fpm84.pid+pid = run/php-fpm84.pid+' /etc/php${PHP_VERSION}/php-fpm.conf; \
+    elif [[ ${PHP_VERSION} = 85 ]]; then \
+       sed -i 's+;pid = run/php-fpm85.pid+pid = run/php-fpm85.pid+' /etc/php${PHP_VERSION}/php-fpm.conf; \
+    fi \
  && chmod 0644 /etc/php${PHP_VERSION}/php-fpm.d/www.conf
+
 
 # Install GLPI
 ADD https://github.com/glpi-project/glpi/releases/download/${GLPI_VERSION}/glpi-${GLPI_VERSION}.tgz /tmp/
