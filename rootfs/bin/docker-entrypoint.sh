@@ -33,21 +33,23 @@ shutdown() {
 # JH addded on 12.10.2022
 # Function only for GLPI
 # Verify folders
+# GLPI_VAR_DIR="/var/www/glpi/files"
 VerifyDir () {
 
-  DIR="/var/www/glpi/files/_cron
-  /var/www/glpi/files/_dumps
-  /var/www/glpi/files/_graphs
-  /var/www/glpi/files/_log
-  /var/www/glpi/files/_lock
-  /var/www/glpi/files/_pictures
-  /var/www/glpi/files/_plugins
-  /var/www/glpi/files/_rss
-  /var/www/glpi/files/_tmp
-  /var/www/glpi/files/_uploads
-  /var/www/glpi/files/_cache
-  /var/www/glpi/files/_sessions
-  /var/www/glpi/files/_locales"
+  DIR="${GLPI_VAR_DIR}/_cron
+  ${GLPI_VAR_DIR}/_dumps
+  ${GLPI_VAR_DIR}/_graphs
+  ${GLPI_VAR_DIR}/_log
+  ${GLPI_VAR_DIR}/_lock
+  ${GLPI_VAR_DIR}/_pictures
+  ${GLPI_VAR_DIR}/_plugins
+  ${GLPI_VAR_DIR}/_rss
+  ${GLPI_VAR_DIR}/_tmp
+  ${GLPI_VAR_DIR}/_uploads
+  ${GLPI_VAR_DIR}/_cache
+  ${GLPI_VAR_DIR}/_sessions
+  ${GLPI_VAR_DIR}/_locales
+  ${GLPI_VAR_DIR}/_inventories"
 
   for i in $DIR
   do
