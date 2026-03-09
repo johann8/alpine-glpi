@@ -37,7 +37,7 @@ ENV POST_MAX_SIZE=50M
 RUN apk --no-cache add \
         php${PHP_VERSION} \
         php${PHP_VERSION}-fpm \
-        #php${PHP_VERSION}-opcache \
+        php${PHP_VERSION}-opcache \
         php${PHP_VERSION}-pecl-apcu \
         php${PHP_VERSION}-pecl-memcached \
         php${PHP_VERSION}-mysqli \
