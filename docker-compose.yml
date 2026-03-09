@@ -79,7 +79,7 @@ services:
 ### === MEMCACHED ===
 #
   memcached:
-    image: memcached:alpine3.17
+    image: memcached:alpine3.23
     container_name: memcached
     restart: always
     depends_on:
