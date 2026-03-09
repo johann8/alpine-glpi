@@ -40,11 +40,13 @@ RUN apk --no-cache add \
         php${PHP_VERSION}-opcache \
         php${PHP_VERSION}-pecl-apcu \
         php${PHP_VERSION}-pecl-memcached \
+        php${PHP_VERSION}-pecl-redis \
         php${PHP_VERSION}-mysqli \
         php${PHP_VERSION}-cli \
         php${PHP_VERSION}-ldap \
         php${PHP_VERSION}-sodium \
         php${PHP_VERSION}-bz2 \
+        php${PHP_VERSION}-bcmath \
         php${PHP_VERSION}-exif \
         php${PHP_VERSION}-imap \
         php${PHP_VERSION}-intl \
