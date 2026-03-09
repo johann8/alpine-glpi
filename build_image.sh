@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set variables
-D_IMAGE_VERSION=10.0.24.1
+D_IMAGE_VERSION=10.0.24.2
 _TAG=alpine-glpi
 BASE_IMAGE=alpine:3.22
 GLPI_VERSION=10.0.24
