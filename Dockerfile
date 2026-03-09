@@ -110,7 +110,7 @@ RUN apk --no-cache add \
 # Add configuration files
 #COPY --chown=nobody rootfs/ /
 COPY rootfs/ /
-copy php/php${PHP_VERSION} /etc/
+COPY php/php${PHP_VERSION}/ /etc/php${PHP_VERSION}/
 COPY scripts/backup.sh /bin/backup.sh
 
 # Set php option and rights
