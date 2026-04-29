@@ -9,7 +9,7 @@ LABEL Maintainer="JH <jh@localhost>" \
 ARG BUILD_DATE
 ARG NAME
 ARG VCS_REF
-ARG GLPI_VERSION=22.04
+ARG GLPI_VERSION=10.0.25
 ARG PHP_VERSION=8.3
 
 LABEL org.label-schema.schema-version="1.0" \
