@@ -18,7 +18,6 @@ GLPI is a web-based application helping companies to manage their information sy
 
 ## GLPI Docker Image
 <h2 align="center">Docker Image Alpine 3.22</h2>
-Image is based on [Alpine 3.22](https://hub.docker.com/repository/docker/johann8/alpine-glpi/general)
 
 | Pull | GLPI | Size | Docker Image | Platform | Alpine version |
 |:----:|:----:|:----:|:------------:|:--------:|:--------------:|
