@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # set variables
-D_IMAGE_VERSION=10.0.26
+D_IMAGE_VERSION=10.0.28
 D_IMAGE_TAG=alpine-glpi
 BASE_IMAGE=alpine:3.22
-GLPI_VERSION=10.0.26
+GLPI_VERSION=10.0.28
 PHP_VERSION=83
 
 # build glpi docker
